@@ -1,12 +1,10 @@
 import client.UserClient;
 import generator.UserGenerator;
-import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pojo.Credentials;
 import pojo.User;
 
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;

@@ -6,8 +6,6 @@ import io.restassured.response.Response;
 import pojo.Credentials;
 import pojo.User;
 
-import static io.restassured.RestAssured.get;
-import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 
 public class UserClient extends Client {

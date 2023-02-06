@@ -1,6 +1,5 @@
 package generator;
 
-import pojo.Ingredient;
 import pojo.Order;
 
 import java.util.List;

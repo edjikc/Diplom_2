@@ -1,11 +1,16 @@
 package generator;
 
+import constant.UserConstants;
 import pojo.User;
 
 public class UserGenerator {
 
     public static User createUser(){
-        return new User("123@123.ru", "pass", "TestName");
+        return createUserByFields(UserConstants.EMAIL, UserConstants.PASS, UserConstants.NAME);
+    }
+
+    public static User createUserByFields(String email, String password, String name) {
+        return new User(email, password, name);
     }
     public static User createUserByEmail(String email){
         return new User(email, "pass", "TestName");

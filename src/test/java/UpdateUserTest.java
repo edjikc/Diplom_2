@@ -1,6 +1,7 @@
 import client.UserClient;
 import generator.CredentialsGenerator;
 import generator.UserGenerator;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -29,6 +30,7 @@ public class UpdateUserTest {
     }
 
     @Test
+    @DisplayName("Обновление поля name у пользователя")
     public void updateNameUserField() {
         accessToken = userClient.createAndLogin(user);
         user.setName(NEW_NAME);
@@ -47,6 +49,7 @@ public class UpdateUserTest {
     }
 
     @Test
+    @DisplayName("Обновление поля password у пользователя")
     public void updatePassUserField() {
         accessToken = userClient.createAndLogin(user);
 
@@ -64,7 +67,8 @@ public class UpdateUserTest {
     }
 
     @Test
-    public void updateEmailField(){
+    @DisplayName("Обновление поля email у пользователя")
+    public void updateEmailField() {
         accessToken = userClient.createAndLogin(user);
 
         user.setEmail(UUID.randomUUID() + user.getEmail());
@@ -81,7 +85,8 @@ public class UpdateUserTest {
     }
 
     @Test
-    public void updateExistingEmailField(){
+    @DisplayName("Обновление поля email у пользователя, на существующий email")
+    public void updateExistingEmailField() {
         accessToken = userClient.createAndLogin(user);
 
 
@@ -102,7 +107,8 @@ public class UpdateUserTest {
     }
 
     @Test
-    public void updateUnauthorizedUser(){
+    @DisplayName("Обновление неавторизованного пользователя")
+    public void updateUnauthorizedUser() {
         User unauthorizedUser = UserGenerator.createUser();
         userClient.updateUnauthorizedUser(unauthorizedUser)
                 .then()

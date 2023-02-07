@@ -1,5 +1,6 @@
 import client.UserClient;
 import generator.UserGenerator;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -25,6 +26,7 @@ public class CreateUserTest {
     }
 
     @Test
+    @DisplayName("Создание пользователя")
     public void createNewUser() {
         ValidatableResponse userResponse = client.createNewUser(user).then();
         userResponse.assertThat()
@@ -35,6 +37,7 @@ public class CreateUserTest {
     }
 
     @Test
+    @DisplayName("Создание существующего пользователя")
     public void createExistedUser() {
         createNewUser();
         ValidatableResponse userResponse = client.createNewUser(user).then();
@@ -47,7 +50,8 @@ public class CreateUserTest {
     }
 
     @Test
-    public void createInvalidUser(){
+    @DisplayName("Создание пользователя с незаполнеными полями")
+    public void createInvalidUser() {
         User invalidUser = UserGenerator.createInvalidUser();
         ValidatableResponse then = client.createNewUser(invalidUser).then();
         then.assertThat()

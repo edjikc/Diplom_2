@@ -3,6 +3,7 @@ import client.OrderClient;
 import client.UserClient;
 import generator.OrderGenerator;
 import generator.UserGenerator;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -38,9 +39,10 @@ public class OrderTest {
     }
 
     @Test
+    @DisplayName("Создание заказа")
     public void createOrder() {
         accessToken = userClient.createAndLogin(user);
-        List<String > ingredients = getIngredients()
+        List<String> ingredients = getIngredients()
                 .stream()
                 .limit(2)
                 .map(Ingredient::getId)
@@ -61,6 +63,7 @@ public class OrderTest {
     }
 
     @Test
+    @DisplayName("Создание заказа без авторизации")
     public void createOrderUnauthorized() {
         List<Ingredient> ingredients = getIngredients()
                 .stream()
@@ -78,7 +81,8 @@ public class OrderTest {
     }
 
     @Test
-    public void createOrderWithoutIngredients(){
+    @DisplayName("Создание заказа без ингредиентов")
+    public void createOrderWithoutIngredients() {
         accessToken = userClient.createAndLogin(user);
         Order order = OrderGenerator.generateEmptyOrder();
         orderClient.createOrder(order, accessToken)
@@ -91,7 +95,8 @@ public class OrderTest {
     }
 
     @Test
-    public void createOrderUnauthorizedWithoutIngredients(){
+    @DisplayName("Создание заказа без авторизации и без ингредиентов")
+    public void createOrderUnauthorizedWithoutIngredients() {
         Order order = OrderGenerator.generateEmptyOrder();
         orderClient.createOrderUnauthorized(order)
                 .then()
@@ -103,7 +108,8 @@ public class OrderTest {
     }
 
     @Test
-    public void createOrderWithIncorrectIngredients(){
+    @DisplayName("Создание заказа с неправильным хешем ингредиентов")
+    public void createOrderWithIncorrectIngredients() {
         accessToken = userClient.createAndLogin(user);
         List<String> ingredients = getIngredients()
                 .stream()
@@ -115,8 +121,10 @@ public class OrderTest {
                 .then()
                 .statusCode(SC_INTERNAL_SERVER_ERROR);
     }
+
     @Test
-    public void createOrderUnauthorizedWithIncorrectIngredients(){
+    @DisplayName("Создание заказа без авторизации и с неправильным хешем ингредиентов")
+    public void createOrderUnauthorizedWithIncorrectIngredients() {
         accessToken = userClient.createAndLogin(user);
         List<String> ingredients = getIngredients()
                 .stream()
@@ -130,9 +138,10 @@ public class OrderTest {
     }
 
     @Test
-    public void getUserOrders(){
+    @DisplayName("Получение заказов пользователя")
+    public void getUserOrders() {
         accessToken = userClient.createAndLogin(user);
-        List<String > ingredients = getIngredients()
+        List<String> ingredients = getIngredients()
                 .stream()
                 .limit(2)
                 .map(Ingredient::getId)
@@ -152,7 +161,8 @@ public class OrderTest {
     }
 
     @Test
-    public void getOrdersUnauthorized(){
+    @DisplayName("Полечение заказов без авторизации")
+    public void getOrdersUnauthorized() {
         orderClient.getOrdersUnauthorized()
                 .then()
                 .statusCode(SC_UNAUTHORIZED)
@@ -161,6 +171,7 @@ public class OrderTest {
                 .and()
                 .body("message", Matchers.equalTo("You should be authorised"));
     }
+
     private List<Ingredient> getIngredients() {
         Response ingredients = ingredientClient.getIngredients();
         ingredients.then().statusCode(SC_OK);

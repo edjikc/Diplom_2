@@ -8,7 +8,7 @@ public class Order {
     private Long number;
     private String name;
 
-    public Order(List<String > ingredients) {
+    public Order(List<String> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -35,7 +35,7 @@ public class Order {
         return ingredients;
     }
 
-    public void setIngredients(List<String > ingredients) {
+    public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
 

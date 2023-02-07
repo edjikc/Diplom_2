@@ -1,6 +1,7 @@
 import client.UserClient;
 import generator.CredentialsGenerator;
 import generator.UserGenerator;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -25,6 +26,7 @@ public class LoginUserTest {
     }
 
     @Test
+    @DisplayName("Авторизация существующим пользователем")
     public void loginExistingUser() {
         Response loginResponse = userClient.loginUser(CredentialsGenerator.generateCredentialsFromUser(user));
         loginResponse.then()
@@ -35,6 +37,7 @@ public class LoginUserTest {
     }
 
     @Test
+    @DisplayName("Авторизация с неправильным паролем")
     public void loginInvalid() {
         Response response = userClient.loginUser(CredentialsGenerator.generateFromEmailAndPass(user.getEmail(), user.getPassword() + Math.random()));
         response.then()

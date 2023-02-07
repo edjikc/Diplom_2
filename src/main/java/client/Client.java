@@ -17,7 +17,7 @@ public class Client {
                 .build();
     }
 
-    protected RequestSpecification buildRequest(){
+    protected RequestSpecification buildRequest() {
         return given()
                 .spec(getSpec());
     }

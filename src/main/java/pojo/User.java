@@ -1,6 +1,6 @@
 package pojo;
 
-public class User extends Credentials{
+public class User extends Credentials {
     private String name;
 
     public User(String email, String password, String name) {

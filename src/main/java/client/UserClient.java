@@ -53,14 +53,15 @@ public class UserClient extends Client {
     }
 
     @Step("Запрос на обновление пользователя по объекту {newUser} с токеном {token}")
-    public Response updateUserFields(User newUser, String token){
+    public Response updateUserFields(User newUser, String token) {
         return buildRequest()
                 .header("Authorization", token)
                 .body(newUser)
                 .patch(USER_PATH);
     }
+
     @Step("Запрос на обновление пользователя по объекту {user} без авторизации")
-    public Response updateUnauthorizedUser(User user){
+    public Response updateUnauthorizedUser(User user) {
         return buildRequest()
                 .body(user)
                 .patch(USER_PATH);
